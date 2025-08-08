@@ -25,4 +25,6 @@ jobs:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           ALCHEMY_KEY: ${{ secrets.ALCHEMY_KEY }}
           SQUIGS_CONTRACT: ${{ secrets.SQUIGS_CONTRACT }}
+          TEST_GUILD_ID: ${{ secrets.TEST_GUILD_ID }}
+          UGLY_GUILD_ID: ${{ secrets.UGLY_GUILD_ID }}
         run: node deploy-commands.js
