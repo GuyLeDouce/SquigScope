@@ -1,6 +1,6 @@
 import { REST, Routes } from 'discord.js';
 import { config } from 'dotenv';
-import { clientId } from './config.json' assert { type: 'json' };
+import config from './config.json' assert { type: 'json' };
 import fs from 'fs';
 
 config();
@@ -22,7 +22,7 @@ for (const guildId of guilds) {
   try {
     console.log(`Registering slash commands in guild: ${guildId}`);
     await rest.put(
-      Routes.applicationGuildCommands(clientId, guildId),
+      Routes.applicationGuildCommands(config.clientId, guildId)
       { body: commands }
     );
     console.log(`✅ Commands registered in ${guildId}`);
