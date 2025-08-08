@@ -1,3 +1,3 @@
 # Squig Grid Bot
 
-Update to trigger slash command registration
+Update to trigger slash command registration.
