@@ -4,7 +4,7 @@ import generateGrid from '../utils/generateGrid.js';
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('squiggrid')
+    .setName('grid')
     .setDescription('Generate a Squigs grid from a wallet.')
     .addStringOption(option =>
       option.setName('wallet')
