@@ -2,6 +2,7 @@ import { REST, Routes } from 'discord.js';
 import { config } from 'dotenv';
 import { clientId } from './config.json' assert { type: 'json' };
 import fs from 'fs';
+
 config();
 
 const commands = [];
@@ -14,10 +15,18 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
-try {
-  console.log('Registering slash commands...');
-  await rest.put(Routes.applicationCommands(clientId), { body: commands });
-  console.log('Commands registered!');
-} catch (err) {
-  console.error(err);
+// Register in both servers instantly
+const guilds = [process.env.TEST_GUILD_ID, process.env.UGLY_GUILD_ID];
+
+for (const guildId of guilds) {
+  try {
+    console.log(`Registering slash commands in guild: ${guildId}`);
+    await rest.put(
+      Routes.applicationGuildCommands(clientId, guildId),
+      { body: commands }
+    );
+    console.log(`✅ Commands registered in ${guildId}`);
+  } catch (err) {
+    console.error(`❌ Failed to register commands in ${guildId}:`, err);
+  }
 }
