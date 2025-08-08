@@ -1,9 +1,9 @@
 import { REST, Routes } from 'discord.js';
-import { config } from 'dotenv';
+import { config as dotenvConfig } from 'dotenv';
 import config from './config.json' assert { type: 'json' };
 import fs from 'fs';
 
-config();
+dotenvConfig();
 
 const commands = [];
 const commandFiles = fs.readdirSync('./commands');
@@ -22,7 +22,7 @@ for (const guildId of guilds) {
   try {
     console.log(`Registering slash commands in guild: ${guildId}`);
     await rest.put(
-      Routes.applicationGuildCommands(config.clientId, guildId)
+      Routes.applicationGuildCommands(config.clientId, guildId),
       { body: commands }
     );
     console.log(`✅ Commands registered in ${guildId}`);
